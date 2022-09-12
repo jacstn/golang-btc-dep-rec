@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/jacstn/golang-btc-dep-rec/config"
-	"github.com/jacstn/golang-btc-dep-rec/internal/forms"
 	"github.com/jacstn/golang-btc-dep-rec/internal/models"
 	"github.com/justinas/nosurf"
 )
@@ -22,7 +21,6 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	data["csrf_token"] = nosurf.Token(r)
 
 	renderTemplate(w, "home", &models.TemplateData{
-		Form: forms.New(nil),
 		Data: data,
 	})
 }
