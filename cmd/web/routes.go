@@ -5,7 +5,7 @@ import (
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
-	"github.com/jacstn/golang-buy-btc-from-me/internal/handlers"
+	"github.com/jacstn/golang-btc-deposit-reconciliation/internal/handlers"
 )
 
 func routes() *chi.Mux {

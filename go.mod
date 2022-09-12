@@ -1,4 +1,4 @@
-module github.com/jacstn/golang-buy-btc-from-me
+module github.com/jacstn/golang-btc-deposit-reconciliation
 
 go 1.19
 

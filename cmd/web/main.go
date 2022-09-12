@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/jacstn/golang-buy-btc-from-me/config"
-	"github.com/jacstn/golang-buy-btc-from-me/internal/database"
-	"github.com/jacstn/golang-buy-btc-from-me/internal/handlers"
+	"github.com/jacstn/golang-btc-deposit-reconciliation/config"
+	"github.com/jacstn/golang-btc-deposit-reconciliation/internal/database"
+	"github.com/jacstn/golang-btc-deposit-reconciliation/internal/handlers"
 )
 
 const portNumber = ":3000"

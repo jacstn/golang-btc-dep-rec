@@ -5,9 +5,9 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/jacstn/golang-buy-btc-from-me/config"
-	"github.com/jacstn/golang-buy-btc-from-me/internal/forms"
-	"github.com/jacstn/golang-buy-btc-from-me/internal/models"
+	"github.com/jacstn/golang-btc-deposit-reconciliation/config"
+	"github.com/jacstn/golang-btc-deposit-reconciliation/internal/forms"
+	"github.com/jacstn/golang-btc-deposit-reconciliation/internal/models"
 	"github.com/justinas/nosurf"
 )
 

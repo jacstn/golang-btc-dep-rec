@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/jacstn/golang-buy-btc-from-me/internal/ext"
+	"github.com/jacstn/golang-btc-deposit-reconciliation/internal/ext"
 )
 
 type Form struct {

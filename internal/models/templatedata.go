@@ -1,6 +1,6 @@
 package models
 
-import "github.com/jacstn/golang-buy-btc-from-me/internal/forms"
+import "github.com/jacstn/golang-btc-deposit-reconciliation/internal/forms"
 
 type TemplateData struct {
 	Data map[string]interface{}
