@@ -1,4 +1,4 @@
-module github.com/jacstn/golang-btc-deposit-reconciliation
+module github.com/jacstn/golang-btc-dep-rec
 
 go 1.19
 
