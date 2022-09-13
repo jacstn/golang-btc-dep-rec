@@ -1,6 +1,6 @@
 # Bitcoin Incoming Transactions Reconciliation
 
-_Microservice updating database with data received from bitcoin deamon can be found here: https://github.com/jacstn/golang-btc-dep-rec-microservice
+_Microservice updating database with data received from bitcoin deamon can be found here: https://github.com/jacstn/golang-btc-dep-rec-microservice_
 
 ## Installation
 
