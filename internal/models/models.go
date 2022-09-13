@@ -7,49 +7,27 @@ import (
 	"log"
 )
 
-type Deposit struct {
-	TxId          string
-	Vout          string
-	Address       string
-	Amount        float64
-	Category      string
-	Confirmations int8
-}
-
 type Customer struct {
-	Id   uint64
-	Name string
+	Name    string
+	Address string
 }
 
-func NewCustomer(db *sql.DB, c *Customer) (int64, error) {
-	res, err := db.Exec("INSERT INTO `customer` (name) values (?)", c.Name)
-
-	if err != nil {
-		fmt.Println("error while inserting into database", err)
-		return 0, err
-	}
-
-	id, err := res.LastInsertId()
-	if err != nil {
-		println("Error:", err.Error())
-		return 0, err
-	}
-
-	return id, nil
-}
-
-func (c *Customer) Save(db *sql.DB, a *Address) error {
+func (c *Customer) Save(db *sql.DB) error {
 	var err error
 
-	if c.Id == 0 {
-		_, err = db.Exec("INSERT INTO `customer` (name) values (?)", a.CustomerId, a.Address)
+	err = db.QueryRow("SELECT * from customer where address=??", c.Address).Scan(&c.Address)
+
+	if err != nil {
+		// record already exists, update confirmations only
+		_, err = db.Exec("INSERT INTO `customer` (name, address) values (?, ?)", c.Name, c.Address)
 		if err != nil {
 			log.Println(err)
 			return errors.New("Customer, unable to insert new record")
 		}
 		return nil
 	}
-	_, err = db.Exec("Update `customer` set name=?, address=?", a.CustomerId, a.Address)
+
+	_, err = db.Exec("Update `customer` set name=?, address=?", c.Name, c.Address)
 
 	if err != nil {
 		log.Println(err)
@@ -59,9 +37,9 @@ func (c *Customer) Save(db *sql.DB, a *Address) error {
 }
 
 func ListCustomers(db *sql.DB) ([]Customer, error) {
-	res, err := db.Query("SELECT * FROM `order` ORDER BY createdAt DESC LIMIT 20")
+	res, err := db.Query("SELECT address, name FROM `customer`")
 	if err != nil {
-		fmt.Println("error while selecting orders from database")
+		fmt.Println("error while selecting customers from database")
 		return []Customer{}, err
 	}
 
@@ -69,7 +47,7 @@ func ListCustomers(db *sql.DB) ([]Customer, error) {
 
 	for res.Next() {
 		var c Customer
-		err := res.Scan(&c.Id, &c.Name)
+		err := res.Scan(&c.Address, &c.Name)
 
 		if err != nil {
 			log.Println(err)
@@ -80,17 +58,11 @@ func ListCustomers(db *sql.DB) ([]Customer, error) {
 	return customers, nil
 }
 
-type Address struct {
-	CustomerId string
-	Address    string
-}
-
-func (a *Address) Save(db *sql.DB) error {
-	_, err := db.Exec("INSERT into `address` set cucstomerId=?, address=?", a.CustomerId, a.Address)
-
-	if err != nil {
-		log.Println(err)
-		return errors.New("Address, unable to insert record")
-	}
-	return nil
+type Deposit struct {
+	TxId          string
+	Vout          int16
+	Address       string
+	Amount        float64
+	Category      string
+	Confirmations int16
 }
