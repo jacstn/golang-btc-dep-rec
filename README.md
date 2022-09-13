@@ -1,11 +1,13 @@
-Bitcoin Incoming Transactions Reconciliation
+# Bitcoin Incoming Transactions Reconciliation
 
-# Installation
+_Microservice updating database with data received from bitcoin deamon can be found here: https://github.com/jacstn/golang-btc-dep-rec-microservice
 
-## Using Docker
+## Installation
+
+### Using Docker
 - run command `docker-compose up`. If you face any issue with installation check *Known issues section*.
 
-### Tests
+## Tests
 Tests are only available under local installation
   - run `go test` to perform unit testing of application
 
@@ -19,21 +21,16 @@ MYSQL database engine has been used in version `8.0.28`
   - `Customer` - store personal information about customer and its Bitcoin Address
   - `BTCDeposit` - store information about deposits
 
-## Unique Deposit
+#### Unique Deposit
 Deposits are stored in `BTCDeposit` table and it's uniqueness is protected by composite primary key that includes:
   - transaction ID - `txid`
   - vout - `vout`
 
-## Valid Deposit Assumptions
+#### Valid Deposit Assumptions
   - deposit `0.00000000` is *not* a valid deposit
   - deposits has to have minimum 6 confirmations
   - coinbase transactions are treated as deposits, and only valid with 100+ confirmations (`generate` category)
   - when a single transaction has *multiple* deposits on the same address they are treated as *seperated* deposits. If this is not correct, proposed solution would be to merge transactions under new composite key: (`txid`, `address`) and remove `vout` as it would not be necessary.
-
-## Services
-  - `data-service` - responsible for deliverying transactions data
-  - `btc-transaction-service` - responsible for analyzing and filtering transactions
-  - `btc-deposit-info-service` - responsible for analyzing deposits in database and producing report data
 
 
 # Known Issues
